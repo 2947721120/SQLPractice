@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 
 import butterknife.Bind;
@@ -59,8 +61,7 @@ public class QuestionActivity extends StandardActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.question_menu, menu);
         Utils.loadMenuIcon(menu, R.id.random, FontAwesomeIcons.fa_random);
-        Utils.loadMenuIcon(menu, R.id.backward, FontAwesomeIcons.fa_arrow_left);
-        Utils.loadMenuIcon(menu, R.id.forward, FontAwesomeIcons.fa_arrow_right);
+        Utils.loadMenuIcon(menu, R.id.instructional_materials, FontAwesomeIcons.fa_info_circle);
         return true;
     }
 
@@ -72,13 +73,17 @@ public class QuestionActivity extends StandardActivity {
                 int newPosition = Utils.getRandomQuestionIndex(currentPosition);
                 questionPager.setCurrentItem(newPosition, true);
                 return true;
-            case R.id.backward:
-                int previousQuestion = currentPosition == 0 ? QuestionServer.getNumQuestions() - 1 : currentPosition - 1;
-                questionPager.setCurrentItem(previousQuestion);
-                return true;
-            case R.id.forward:
-                int nextQuestion = currentPosition == QuestionServer.getNumQuestions() - 1 ? 0 : currentPosition + 1;
-                questionPager.setCurrentItem(nextQuestion);
+            case R.id.instructional_materials:
+                new MaterialDialog.Builder(this)
+                        .title(R.string.materials_title)
+                        .items(QuestionServer.getQuestionServer().getQuestion(currentPosition).getIdeas())
+                        .itemsCallback(new MaterialDialog.ListCallback() {
+                            @Override
+                            public void onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+
+                            }
+                        })
+                        .show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -1,6 +1,7 @@
 package randomappsinc.com.sqlpractice.Database;
 
 import randomappsinc.com.sqlpractice.Database.Models.Question;
+import randomappsinc.com.sqlpractice.Misc.TutorialServer;
 
 /**
  * Created by alexanderchiou on 10/31/15.
@@ -16,6 +17,36 @@ public class QuestionServer {
              {0}, {0}, {1}, {0}, {2},
              {0}, {0}, {0}, {0}, {1, 2},
              {1}, {0}, {0}};
+
+    private static String[][] questionIdeaPairings =
+           {{TutorialServer.INTRO},
+            {TutorialServer.INTRO},
+            {TutorialServer.INTRO},
+            {TutorialServer.INTRO},
+            {TutorialServer.INTRO},
+            {TutorialServer.INTRO},
+            {TutorialServer.INTRO},
+            {TutorialServer.INTRO},
+            {TutorialServer.INTRO},
+            {TutorialServer.INTRO},
+            {TutorialServer.INTRO},
+            {TutorialServer.INTRO},
+            {TutorialServer.INTRO},
+            {TutorialServer.INTRO},
+            {TutorialServer.INTRO},
+            {TutorialServer.INTRO},
+            {TutorialServer.INTRO},
+            {TutorialServer.INTRO},
+            {TutorialServer.INTRO},
+            {TutorialServer.INTRO},
+            {TutorialServer.INTRO},
+            {TutorialServer.INTRO},
+            {TutorialServer.INTRO},
+            {TutorialServer.INTRO},
+            {TutorialServer.INTRO},
+            {TutorialServer.INTRO},
+            {TutorialServer.INTRO},
+            {TutorialServer.INTRO}};
 
     // Questions stored here in this ghetto hard-coded array
     private static String[] questions =
@@ -67,7 +98,7 @@ public class QuestionServer {
 
     private QuestionServer () {
         for (int i = 0; i < questions.length; i++) {
-            allQuestions[i] = new Question(questions[i], questionTablePairings[i]);
+            allQuestions[i] = new Question(questions[i], questionTablePairings[i], questionIdeaPairings[i]);
         }
     }
 
